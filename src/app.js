@@ -19,10 +19,12 @@ res.send("app is working")
 })
 
 const userController = require('./Controllers/userController')
+const productController = require('./Controllers/productController')
 
 
 app.use('/users',userController)
 
+app.use('/products',productController)
 
 app.listen(port, ()=> {
 
