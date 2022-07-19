@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router()
 const Encryption = require('../Services/EncryptionService')
 const jwt = require("jsonwebtoken");
+const User = require("../Entity/user")
 module.exports = {
-
 findusers:async function findusers (User) {
 let users
 try{
@@ -35,8 +35,17 @@ return true ;
 }catch(err){
 console.log(err);
 }
-},adduser:async function adduser (user){
+},
+finduserbyemail:async function  finduserbyemail (email) {
+let users
+try{
+users = await User.find({email:email})
 
+}catch(err){
+console.log(err);
+}
+return users
+},adduser:async function adduser (user){
 try{
 await user.save()
 }catch(err){

@@ -11,7 +11,7 @@ const con = mongoose.connection
 app.use(express.json())
 con.on('open' , ()=>{
 
-console.log("conected...");
+console.log("connected...");
 
 } )
 app.get('/',(req , res)=>{
@@ -20,11 +20,13 @@ res.send("app is working")
 
 const userController = require('./Controllers/userController')
 const productController = require('./Controllers/productController')
-
+const AuthController = require('./Controllers/AuthController')
 
 app.use('/users',userController)
 
 app.use('/products',productController)
+
+app.use('/Auth',AuthController)
 
 app.listen(port, ()=> {
 
