@@ -34,7 +34,6 @@ const id= user[0]._id
 
 user[0].token=token
 
-
 try{
 await User.findByIdAndUpdate(id , { token: token },function (err, docs) {
 })
