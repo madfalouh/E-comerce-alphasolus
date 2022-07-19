@@ -3,27 +3,29 @@ const router = express.Router()
 const User = require('../Entity/user')
 const Encryption = require('../Services/EncryptionService')
 const jwt = require("jsonwebtoken");
+const userService = require("../Services/userService")
 router.get('/' , findusers)
 router.get('/:id' , finduserbyid)
 router.post('/' , adduser)
 async function findusers (req , res) {
 try{
-const users = await User.find()
+const users = await userService.findusers(User)
+res.send(users)
 }catch(err){
 res.send(err)
 }
 }
 async function  finduserbyid (req , res) {
 try{
-const users = await User.findById(req.params.id)
-console.log(users );
+const users = await userService.finduserbyid(User ,req.params.id)
+res.send(users)
 }catch(err){
 res.send(err)
 }
 }
 async function  finduserbyname (username) {
 try{
-const users = await User.find({username:username})
+const users = await userService.finduserbyname( User,username)
 
 if(users){
 return false ; 
@@ -59,7 +61,7 @@ lastName:req.body.lastName
 })
 console.log(req.body);
 try{
-await user.save()
+await userService.adduser(user)
 res.send(user)
 }catch(err){
 res.send(err)
