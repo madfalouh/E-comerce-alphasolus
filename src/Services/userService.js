@@ -51,5 +51,15 @@ await user.save()
 }catch(err){
 console.log(err)
 }
+},deleteuser:async function deleteuser (id){
+try{
+await User.deleteOne({_id:id})
+}catch(err){
+console.log(err)
 }
+}
+
+
+
+
 }
