@@ -57,6 +57,20 @@ await User.deleteOne({_id:id})
 }catch(err){
 console.log(err)
 }
+}, updateuser : async function updateuser(user) {
+const password = await Encryption.cryptPassword(user.password)    
+try{
+await User.findByIdAndUpdate(user.id ,{ 
+username : user.username,  
+email :user.email ,
+password :password ,
+firstName:user.firstName ,
+lastName: user.lastName,
+ },function (err, docs) {
+})
+}catch(err){
+console.log(err);
+}
 }
 
 
