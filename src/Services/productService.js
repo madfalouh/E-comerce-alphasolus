@@ -1,4 +1,5 @@
 const express = require('express');
+const Product = require('../Entity/product');
 const router = express.Router()
 module.exports = {
 findproducts :async function findproducts (Product) {
@@ -28,14 +29,28 @@ products = await Product.find({name:product})
 console.log(err);
 }
 return products
-},
-
-addproduct:async function addproduct (product){
+},addproduct:async function addproduct (product){
 console.log(product);
 try{
 await product.save()
 }catch(err){
 res.send(err)
+}
+},deleteproduct:async function deleteproduct (id){
+try{
+await Product.deleteOne({_id:id})
+}catch(err){
+console.log(err)
+}
+}, updateproduct : async function updateproduct(product) {  
+try{
+await Product.findByIdAndUpdate(product.id ,{ 
+name : product.name,  
+price :product.price ,
+description: product.description,
+ },function (err, docs) {
+})
+}catch(err){
 }
 }
 }

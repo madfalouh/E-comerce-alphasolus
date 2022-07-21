@@ -3,10 +3,12 @@ const router = express.Router()
 const User = require('../Entity/user')
 const Encryption = require('../Services/EncryptionService')
 const jwt = require("jsonwebtoken");
-const userService = require("../Services/userService")
+const userService = require("../Services/userService");
 router.get('/' , findusers)
 router.get('/:id' , finduserbyid)
 router.post('/' , adduser)
+router.post('/delete' , deleteuser)
+router.post('/update' , updateuser)
 async function findusers (req , res) {
 try{
 const users = await userService.findusers(User)
@@ -68,4 +70,37 @@ res.send(err)
 }
 
 }
+
+async function  deleteuser (req , res) {
+console.log(req.body);
+try{
+const users = await userService.deleteuser(req.body.id)
+res.send("deleted")
+}catch(err){
+res.send(err)
+}
+}
+
+
+async function  updateuser (req , res) {
+console.log(req.body);
+const user =({
+id : req.body.id ,
+username : req.body.username  ,
+email :req.body.email,
+password :req.body.password,
+firstName :req.body.firstName,
+lastName :req.body.lastName,
+})
+try{
+const users = await userService.updateuser(user)
+res.send(users)
+}catch(err){
+res.send(err)
+}
+}
+
+
+
+
 module.exports=router

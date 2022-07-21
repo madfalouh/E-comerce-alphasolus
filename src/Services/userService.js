@@ -69,11 +69,6 @@ lastName: user.lastName,
  },function (err, docs) {
 })
 }catch(err){
-console.log(err);
 }
 }
-
-
-
-
 }
