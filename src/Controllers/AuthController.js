@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const userService = require("../Services/userService");
 const { use } = require('./userController');
 router.post("/login" , login)
+router.post("/logout" , logout)
 
 
 async function login(req , res) {
@@ -45,5 +46,11 @@ res.send("password or email is incorrect")
 }
 
 }
+
+
+ async function logout(req, res, next)  {
+        res.end();
+        return;
+    }
 
 module.exports=router
