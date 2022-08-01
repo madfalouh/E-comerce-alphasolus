@@ -66,6 +66,7 @@ email :user.email ,
 password :password ,
 firstName:user.firstName ,
 lastName: user.lastName,
+type : user.type
  },function (err, docs) {
 })
 }catch(err){

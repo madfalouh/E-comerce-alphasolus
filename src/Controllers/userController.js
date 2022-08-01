@@ -91,6 +91,7 @@ email :req.body.email,
 password :req.body.password,
 firstName :req.body.firstName,
 lastName :req.body.lastName,
+type:req.body.type
 })
 try{
 const users = await userService.updateuser(user)

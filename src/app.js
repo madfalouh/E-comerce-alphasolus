@@ -21,13 +21,11 @@ res.send("app is working")
 const userController = require('./Controllers/userController')
 const productController = require('./Controllers/productController')
 const AuthController = require('./Controllers/AuthController')
-
+const comandController = require('./Controllers/comandController');
 app.use('/users',userController)
-
 app.use('/products',productController)
-
 app.use('/Auth',AuthController)
-
+app.use('/comands' , comandController)
 app.listen(port, ()=> {
 
 console.log(`port is listening on ${port}`);

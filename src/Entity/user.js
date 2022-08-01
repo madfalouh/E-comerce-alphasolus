@@ -30,7 +30,6 @@ required:true
 type:{
 type:String, 
 enum : ['user','admin' , 'moderator' , 'superadmin' ],
-default :'user'
 },
 })
 module.exports=mongoose.model('User',userSchema)
