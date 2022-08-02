@@ -1,11 +1,13 @@
 const express = require('express')
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const cors = require('cors');
 require('dotenv').config();
 const port = process.env.PORT
 const hostname = process.env.DB_HOSTNAME
 const url= `mongodb://${hostname}/alphadb`
 const app = express()
+app.use(cors())
 mongoose.connect(url)
 const con = mongoose.connection
 app.use(express.json())

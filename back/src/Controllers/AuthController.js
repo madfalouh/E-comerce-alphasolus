@@ -10,13 +10,14 @@ router.post("/logout" , logout)
 
 
 async function login(req , res) {
-
+console.log(req.body);
 const {email , password}=req.body
-
+let compare
 let user = await userService.finduserbyemail(email)
-
-const compare = await Encryption.compare(password , user[0].password);
-
+ try{
+ compare = await Encryption.compare(password , user[0].password);
+ } catch{
+}
 if(user!=undefined &&  compare  ){
 const id= user[0]._id
  const token = jwt.sign(
@@ -40,9 +41,8 @@ await User.findByIdAndUpdate(id , { token: token },function (err, docs) {
 })
 }catch(err){
 }
-res.send("connected")
+res.json(token)
 }else{
-res.send("password or email is incorrect")
 }
 
 }
