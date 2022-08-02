@@ -45,20 +45,46 @@ fetchproducts()
 ,[])
 
 
-const handleclick =(e) =>{
+const handleclick = async (e) =>{
 
 e.preventDefault();
 
+	let temp_state = [...products];
+	
+	temp_state.push({
 
+_id :"62d661da03bd48349b77ce73",
+name :"falhikh",
+price :13,
+description :"test"
+})
 
+const data = {
+_id :"62d661da03bd48349b77ce7513",
+name :"fa",
+price :13,
+description :"test"
+}
+temp_state[0].name="first"
 
+	// 5. Set the state to our new copy
+setProducts( temp_state );
 
-let productsHelper=products
+await axios({
 
+method: 'post',
+url: 'http://localhost:3000/products/',
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('__TOKEN__')
 
-productsHelper.push("lol")
+          },
 
+data : data 
+}).then((response)=>{
 
+}  )
 
 
 }
@@ -68,11 +94,10 @@ productsHelper.push("lol")
 
 
 //const decoded_token = jwt.verify(sessionStorage.getItem('__TOKEN__'), 'tokenkey');
-const token = sessionStorage.getItem('__TOKEN__')
+const token = localStorage.getItem('__TOKEN__')
 const decoded_token=  jwt_decode(token,"tokenkey");
 
 
-console.log(decoded_token);
 
 return (
 

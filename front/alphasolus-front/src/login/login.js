@@ -26,7 +26,7 @@ url: 'http://localhost:3000/Auth/login',
 
 data : data 
 }).then((response)=>{
-sessionStorage.setItem('__TOKEN__', response.data);
+localStorage.setItem('__TOKEN__', response.data);
 navigate("/home")
 
 }  )
