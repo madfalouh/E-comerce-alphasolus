@@ -1,8 +1,22 @@
 import { useRef } from "react"
 import axios from 'axios';
 import {useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
+import { dispatchLogin} from '../redux/actions/authAction'
+
+const initialState = {
+    email: '',
+    password: '',
+    err: '',
+    success: '',
+}
+
 export default function Login() {
+const dispatch = useDispatch()
 const navigate=useNavigate()
+const auth = useSelector((state) => state.auth)
+
+const { error, userInfo, isLogged ,type } = auth
 
 const emailRef = useRef()
 const passwordRef = useRef()
@@ -15,21 +29,16 @@ email : emailRef.current.value  ,
 password : passwordRef.current.value
 }
  
-await axios({
 
-method: 'post',
-url: 'http://localhost:3000/Auth/login',
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json',
-          },
+dispatch(dispatchLogin(data))
 
-data : data 
-}).then((response)=>{
-localStorage.setItem('__TOKEN__', response.data);
+console.log(type);
+
+if(userInfo) {
 navigate("/home")
+}
 
-}  )
+
 }
 
 

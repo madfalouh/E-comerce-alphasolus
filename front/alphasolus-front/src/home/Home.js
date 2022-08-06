@@ -1,12 +1,14 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { useEffect, useRef, useState } from "react";
+import { logout } from "../redux/actions/authAction";
+import { useDispatch, useSelector } from 'react-redux'
 
 
 
 export default function Home() {
 const [products , setProducts] = useState([]) 
-
+const dispatch = useDispatch()
 
 
 
@@ -86,6 +88,17 @@ data : data
 
 }  )
 
+}
+
+
+const hundleLogout = async (e) =>{
+
+e.preventDefault();
+
+
+
+dispatch(logout())
+
 
 }
 
@@ -93,10 +106,12 @@ data : data
 
 
 
+
 //const decoded_token = jwt.verify(sessionStorage.getItem('__TOKEN__'), 'tokenkey');
-const token = localStorage.getItem('__TOKEN__')
+const token = localStorage.getItem('userInfo')
 const decoded_token=  jwt_decode(token,"tokenkey");
 
+console.log(decoded_token);
 
 
 return (
@@ -118,6 +133,9 @@ return (
 
 </ul>  
 <button  onClick={handleclick} > add </button>
+
+<button className="submit-btn-form" type="submit"  onClick={hundleLogout} >Logout</button>
+
 </div>
 )
 

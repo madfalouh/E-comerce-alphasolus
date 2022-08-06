@@ -12,7 +12,8 @@ try{
 const products = await productService.findproducts(Product)
 res.send(products)
 }catch(err){
-res.send(err)
+return res.status(500).json({ msg: err.message })
+
 }
 }
 async function  findproductsbyid (req , res) {
@@ -20,7 +21,8 @@ try{
 const products = await productService.findproductsbyid(Product,req.params.id)
 res.send(products)
 }catch(err){
-res.send(err)
+return res.status(500).json({ msg: err.message })
+
 }
 }
 async function  findproductbyname (product) {
@@ -43,7 +45,8 @@ try{
 await productService.addproduct(product)
 res.send(product)
 }catch(err){
-res.send(err)
+return res.status(500).json({ msg: err.message })
+
 }
 
 }
@@ -54,7 +57,8 @@ try{
 const products = await productService.deleteproduct(req.body.id)
 res.send("deleted")
 }catch(err){
-res.send(err)
+return res.status(500).json({ msg: err.message })
+
 }
 }
 
@@ -71,7 +75,8 @@ try{
 const products = await productService.updateproduct(product)
 res.send(products)
 }catch(err){
-res.send(err)
+return res.status(500).json({ msg: err.message })
+
 }
 }
 

@@ -16,7 +16,7 @@ try{
 const comands= await comandService.findcomands()
 res.send(comands)
 }catch(err){
-res.send(err)
+return res.status(500).json({ msg: err.message })
 }
 }
 async function  findcomandsbyid (req , res) {
@@ -24,7 +24,7 @@ try{
 const comands = await comandService.findcomandsbyid(req.params.id)
 res.send(comands)
 }catch(err){
-res.send(err)
+return res.status(500).json({ msg: err.message })
 }
 }
 async function  findcomandsbyname (comand) {
@@ -52,7 +52,7 @@ try{
 await comandService.addcomand(comand)
 res.send(comand )
 }catch(err){
-res.send(err)
+return res.status(500).json({ msg: err.message })
 }
 
 }
@@ -63,7 +63,7 @@ try{
 const comands = await comandService.deletecomand(req.body.id)
 res.send("deleted")
 }catch(err){
-res.send(err)
+return res.status(500).json({ msg: err.message })
 }
 }
 
@@ -81,7 +81,7 @@ try{
 const comands = await comandService.updatecomand(comand)
 res.send(comands)
 }catch(err){
-res.send(err)
+return res.status(500).json({ msg: err.message })
 }
 }
 
@@ -91,7 +91,7 @@ try{
 const comand = await comandService.findcomandbystatuts(status)
 res.send(comand) 
 }catch(err){
-console.log(err);
+return res.status(500).json({ msg: err.message })
 }
 }
 

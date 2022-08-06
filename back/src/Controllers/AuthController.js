@@ -18,7 +18,7 @@ let user = await userService.finduserbyemail(email)
  compare = await Encryption.compare(password , user[0].password);
  } catch{
 }
-if(user!=undefined &&  compare  ){
+if(user!=undefined &&  compare){
 const id= user[0]._id
  const token = jwt.sign(
                     {
@@ -26,7 +26,8 @@ const id= user[0]._id
                     username:user[0].username , 
                     email: user[0].email,
                     firstName:user[0].firstName,
-                    lastName:user[0].lastName
+                    lastName:user[0].lastName,
+                    type:user[0].type
                     },
                     process.env.TOKEN_KEY,
                     {
@@ -37,9 +38,9 @@ const id= user[0]._id
 user[0].token=token
 
 try{
-await User.findByIdAndUpdate(id , { token: token },function (err, docs) {
-})
+await User.findByIdAndUpdate(id , { token: token })
 }catch(err){
+return res.status(500).json({ msg: err.message })
 }
 res.json(token)
 }else{

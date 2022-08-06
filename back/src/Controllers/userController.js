@@ -12,17 +12,19 @@ router.post('/update' , updateuser)
 async function findusers (req , res) {
 try{
 const users = await userService.findusers(User)
-res.send(users)
+res.json(users)
 }catch(err){
-res.send(err)
+return res.status(500).json({ msg: err.message })
+
 }
 }
 async function  finduserbyid (req , res) {
 try{
 const users = await userService.finduserbyid(User ,req.params.id)
-res.send(users)
+res.json(users)
 }catch(err){
-res.send(err)
+return res.status(500).json({ msg: err.message })
+
 }
 }
 async function  finduserbyname (username) {
@@ -35,7 +37,7 @@ return false ;
 return true ; 
 }
 }catch(err){
-console.log(err);
+return res.status(500).json({ msg: err.message })
 }
 }
 
@@ -45,7 +47,8 @@ async function adduser (req , res){
                     username:req.body.username , 
                     email: req.body.email,
                     firstName:req.body.firstName,
-                    lastName:req.body.lastName
+                    lastName:req.body.lastName,
+                    type : req.body.type,
                     },
                     process.env.TOKEN_KEY,
                     {
@@ -59,14 +62,16 @@ email: req.body.email,
 password:password,
 token:token,
 firstName:req.body.firstName,
-lastName:req.body.lastName
+lastName:req.body.lastName,
+type : req.body.type,
 })
 console.log(req.body);
 try{
 await userService.adduser(user)
-res.send(user)
+res.json(user)
 }catch(err){
-res.send(err)
+return res.status(500).json({ msg: err.message })
+
 }
 
 }
@@ -75,9 +80,11 @@ async function  deleteuser (req , res) {
 console.log(req.body);
 try{
 const users = await userService.deleteuser(req.body.id)
-res.send("deleted")
+res.json({ msg: 'deleted!' })
 }catch(err){
-res.send(err)
+ res.status(404)
+throw new Error('Project not found')
+
 }
 }
 
@@ -97,7 +104,7 @@ try{
 const users = await userService.updateuser(user)
 res.send(users)
 }catch(err){
-res.send(err)
+return res.status(500).json({ msg: err.message })
 }
 }
 
