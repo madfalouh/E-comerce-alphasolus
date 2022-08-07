@@ -32,7 +32,7 @@ password : passwordRef.current.value
 
 dispatch(dispatchLogin(data))
 
-console.log(type);
+console.log("thissss"+auth.userInfo);
 
 if(userInfo) {
 navigate("/home")

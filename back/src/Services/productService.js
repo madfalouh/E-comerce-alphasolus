@@ -34,7 +34,7 @@ console.log(product);
 try{
 await product.save()
 }catch(err){
-res.send(err)
+console.log(err);
 }
 },deleteproduct:async function deleteproduct (id){
 try{

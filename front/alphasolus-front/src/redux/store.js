@@ -6,10 +6,17 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { Provider } from 'react-redux'
 import { combineReducers } from 'redux'
 import authReducer from './reducer/AuthReducer'
+import {
+getProductReducer ,
+addProductReducer
+} from './reducer/ProductReducer'
+
+
 
 const reducer = combineReducers({
-    auth: authReducer
-
+    auth: authReducer , 
+    getProducts : getProductReducer,
+    addProductReducer :addProductReducer ,
 })
 
 

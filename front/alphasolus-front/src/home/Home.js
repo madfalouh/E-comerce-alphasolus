@@ -3,48 +3,27 @@ import jwt_decode from "jwt-decode";
 import { useEffect, useRef, useState } from "react";
 import { logout } from "../redux/actions/authAction";
 import { useDispatch, useSelector } from 'react-redux'
-
+import {dispatchGetProduct , dispatchAddProduct } from '../redux/actions/productAction'
 
 
 export default function Home() {
-const [products , setProducts] = useState([]) 
+const [product , setProduct] = useState([]) 
 const dispatch = useDispatch()
+const prods = useSelector((state) => state.getProducts)
+
+const  {products , isnull} =prods
 
 
 
 
-
-useEffect(  () => {
-
-const fetchproducts =  async  ()=>{
-
-
-
-await axios({
-
-method :'get' ,
-url:'http://localhost:3000/products' , 
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + sessionStorage.getItem('__TOKEN__')
-        },
-
-}).then((response)=>{
-
-setProducts(response.data)
-
-
-}  )
-
+useEffect(() => {
+dispatch(dispatchGetProduct())
+if(!isnull){
+console.log(prods);
+setProduct(products)}
 }
 
-
-fetchproducts()
-
-}
-
-,[])
+,[isnull])
 
 
 const handleclick = async (e) =>{
@@ -53,40 +32,25 @@ e.preventDefault();
 
 	let temp_state = [...products];
 	
-	temp_state.push({
 
-_id :"62d661da03bd48349b77ce73",
-name :"falhikh",
-price :13,
-description :"test"
-})
 
 const data = {
-_id :"62d661da03bd48349b77ce7513",
-name :"fa",
+_id :"62d66hg1da03bd4834h9b77ce75opo13",
+name :"fah",
 price :13,
 description :"test"
 }
-temp_state[0].name="first"
 
-	// 5. Set the state to our new copy
-setProducts( temp_state );
+temp_state.push(data)
 
-await axios({
+dispatch(dispatchAddProduct(data))
 
-method: 'post',
-url: 'http://localhost:3000/products/',
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + sessionStorage.getItem('__TOKEN__')
 
-          },
 
-data : data 
-}).then((response)=>{
 
-}  )
+setProduct( temp_state );
+
+
 
 }
 
@@ -125,7 +89,7 @@ return (
 
 <ul> 
 
-{products.map( (pr=>(<li key={pr.id}>{pr.name}</li>
+{product.map( (pr=>(<li key={pr.id}>{pr.name}</li>
  ) 
 
 

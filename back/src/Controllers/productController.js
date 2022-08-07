@@ -35,6 +35,8 @@ console.log(err);
 }
 
 async function addproduct (req , res){
+
+console.log(req.body);
 const product = new Product({
 name:req.body.name , 
 price: req.body.price,
@@ -45,7 +47,8 @@ try{
 await productService.addproduct(product)
 res.send(product)
 }catch(err){
-return res.status(500).json({ msg: err.message })
+
+console.log(err);
 
 }
 
