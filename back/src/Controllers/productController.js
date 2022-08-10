@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router()
 const Product = require('../Entity/product')
 const productService = require("../Services/productService")
+const multer = require('multer');
+const fs = require("fs");
+
 router.get('/' , findproducts)
 router.get('/:id' , findproductsbyid)
 router.post('/' , addproduct)
@@ -36,11 +39,25 @@ console.log(err);
 
 async function addproduct (req , res){
 
-console.log(req.body);
+
+
+
+
+
+console.log(req.files);
+
+const {data , mimetype} = req.files.file
+
+console.log(data);
+
 const product = new Product({
 name:req.body.name , 
 price: req.body.price,
-description:req.body.description
+description:req.body.description , 
+img :  {
+  data: data,
+  contentType: mimetype,
+}
 })
 try{
 
