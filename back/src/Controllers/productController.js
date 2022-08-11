@@ -44,11 +44,11 @@ async function addproduct (req , res){
 
 
 
-console.log(req.files);
+
 
 const {data , mimetype} = req.files.file
 
-console.log(data);
+
 
 const product = new Product({
 name:req.body.name , 
@@ -62,7 +62,7 @@ img :  {
 try{
 
 await productService.addproduct(product)
-res.send(product)
+console.log("added");
 }catch(err){
 
 console.log(err);

@@ -30,7 +30,7 @@ console.log(err);
 }
 return products
 },addproduct:async function addproduct (product){
-console.log(product);
+
 try{
 await product.save()
 }catch(err){

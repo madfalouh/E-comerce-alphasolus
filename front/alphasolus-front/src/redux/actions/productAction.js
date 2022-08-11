@@ -58,28 +58,31 @@ try{
 dispatch({
 type :ADD_PRODUCTSTATUS_REQUEST
 })
-const config = {
-      headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('userInfo')
-        },
-}
+
 await axios({
 method:"post",
 url : "http://localhost:3000/products"  ,
 headers: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('userInfo')
+         // 'Authorization': 'Bearer ' + localStorage.getItem('userInfo')
         },
 data:creds
 })
+
+console.log("gghh");
+
 dispatch({
 type :ADD_PRODUCTSTATUS_SUCCESS , 
+payload: {
+msg : "adeed"
+}
 })
 
 }catch(error){
+
+console.log(error);
+
 dispatch({
 type :  ADD_PRODUCTSTATUS_FAIL  , 
 payload : 
