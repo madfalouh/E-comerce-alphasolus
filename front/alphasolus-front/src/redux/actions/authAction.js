@@ -60,15 +60,26 @@ export const dispatchRegister = (creds) => async (dispatch) => {
                 'Content-Type': 'application/json',
             },
         }
-
-        const { data } = await axios.post('user/register', creds, config)
-        dispatch({
+       
+        let data
+await axios({ 
+             method:"post",  
+             url : 'http://localhost:3000/users/',
+             
+             data: creds}).then((response) =>{
+                    data = response.data
+                    })
+    
+dispatch({
             type:  USER_REGISTER_SUCCESS,
-            payload: data,
+            payload : {
+                    user : data
+                    }
         })
 
         //   localStorage.setItem('userInfo', JSON.stringify(data))
     } catch (error) {
+            console.log(JSON.stringify(error));
         dispatch({
             type:  USER_REGISTER_FAIL,
             payload:

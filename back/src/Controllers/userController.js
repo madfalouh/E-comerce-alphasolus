@@ -42,6 +42,8 @@ return res.status(500).json({ msg: err.message })
 }
 
 async function adduser (req , res){
+
+console.log(req.body);
  const token = jwt.sign(
                     { 
                     username:req.body.username , 
@@ -65,10 +67,10 @@ firstName:req.body.firstName,
 lastName:req.body.lastName,
 type : req.body.type,
 })
-console.log(req.body);
+
 try{
 await userService.adduser(user)
-res.json(user)
+res.json(user.token)
 }catch(err){
 return res.status(500).json({ msg: err.message })
 

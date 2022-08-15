@@ -9,6 +9,7 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import Register from './login/register';
 
 
 
@@ -33,7 +34,7 @@ const navigate=useNavigate()
 
  <Route path="/login" element={   <Login/>} />
  <Route path="/home" element={   <Home/>} />
-
+ <Route path="/register" element={   <Register/>} />
 </Routes>
   
 

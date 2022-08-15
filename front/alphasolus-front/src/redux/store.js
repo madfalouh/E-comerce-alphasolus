@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 import { Provider } from 'react-redux'
 import { combineReducers } from 'redux'
-import authReducer from './reducer/AuthReducer'
+import authReducer, { userRegisterReducer } from './reducer/AuthReducer'
 import {
 getProductReducer ,
 addProductReducer
@@ -15,6 +15,7 @@ addProductReducer
 
 const reducer = combineReducers({
     auth: authReducer , 
+    register : userRegisterReducer , 
     getProducts : getProductReducer,
     addProductReducer :addProductReducer ,
 })
