@@ -1,14 +1,39 @@
 import { useEffect, useRef, useState } from "react"
+import { dispatchAddComand } from "../../redux/actions/comandAction";
+import { useDispatch, useSelector } from 'react-redux'
+import jwt_decode from "jwt-decode";
 
 
 
 export default function ProductCard ({data}) {
+const dispatch = useDispatch()
+const token = localStorage.getItem('userInfo')
+const decoded_token=  jwt_decode(token);
+const comanddata = {
 
-
-
+name : "comm",
+userId :decoded_token.id , 
+totalprice : 13 , 
+products : [ {
+       productId: data.id ,
+        productName: data.name ,
+        productPrice :  data.price ,
+        productDescription : data.description , 
+        quantity: 12 ,
+        productimg : data.bufferedimg
+} ] ,
+status : 'notstarted',
+}
 
 console.log(data.name);
 
+const hundleAddClick = async (e) =>{
+e.preventDefault();
+
+dispatch(dispatchAddComand(data))
+
+
+}
 
 
 
@@ -45,8 +70,8 @@ return (
       <div class="stock-status"></div>
       <p class="stock-info">50+ pcs. in stock.</p>
     </div>
-    <div class="buttons">
-      <a href="#" class="button">
+    <div class="buttons" onClick={hundleAddClick} >
+      <a   class="button"   >
         <ion-icon name="bag-add-outline"></ion-icon> Add to cart
       </a>
       <a href="#" class="button">

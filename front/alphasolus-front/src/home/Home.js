@@ -22,7 +22,7 @@ const  {products , isnull} =prods
 const nameRef = useRef()
 const priceRef = useRef()
 const descRef = useRef()
-
+const addCartRef = useRef()
 
 
 useEffect(() => {
@@ -34,18 +34,19 @@ let temp = []
 if(!isnull){
 products.map((singleData) => {
 
-
-
+console.log(singleData);
 const base64String =btoa(new Uint8Array(singleData.img.data.data).reduce(function (data, byte) {
 
 
 return data + String.fromCharCode(byte);
 }, ''));
 const productdata = {
+id :singleData.id ,
 name : singleData.name ,
 price : singleData.price , 
 description :singleData.description , 
-img : base64String , 
+img : base64String ,
+bufferedimg : singleData.img
 }
        temp.push( 
 <ProductCard  data={productdata} ></ProductCard>
@@ -94,6 +95,10 @@ console.log( prods.products.length );
 
 
 }
+
+
+
+
 
 
 

@@ -41,3 +41,44 @@ export const getComandReducer = (state = initialState, action) => {
             return state
     }
 }
+
+
+export const addComandReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ADD_COMANDSTATUS_REQUEST:
+            return { loading: true }
+        case ADD_COMANDSTATUS_SUCCESS:
+            return { loading: false, msg: action.payload.msg }
+        case ADD_COMANDSTATUS_FAIL:
+            return { loading: false, error: action.payload }
+        default:
+            return state
+    }
+}
+
+export const updateComandReducer = (state = {}, action) => {
+    switch (action.type) {
+        case UPDATE_COMANDSTATUS_REQUEST:
+            return { loading: true }
+        case UPDATE_COMANDSTATUS_SUCCESS :
+            return { loading: false, msg: action.payload.msg }
+        case UPDATE_COMANDSTATUS_FAIL :
+            return { loading: false, error: action.payload }
+        default:
+            return state
+    }
+}
+
+
+export const deleteComandReducer = (state = {}, action) => {
+    switch (action.type) {
+        case COMAND_DELETE_REQUEST:
+            return { loading: true }
+        case COMAND_DELETE_SUCCESS  :
+            return { loading: false, msg: action.payload.msg }
+        case COMAND_DELETE_FAIL :
+            return { loading: false, error: action.payload }
+        default:
+            return state
+    }
+}

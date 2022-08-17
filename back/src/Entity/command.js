@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const product = require('./product')
 const comandSchema = new mongoose.Schema({
 name : {
 type:String, 
@@ -17,10 +18,13 @@ required:true,
       {
         productId: String,
         productName:String,
+        productPrice :Number ,
+        productDescription :String , 
         quantity: Number,
-        name: String,
-        price: Number , 
-  
+        productimg : {
+            data : Buffer , 
+            contentType : String, 
+                }
       }
     ],
 modifiedOn: {

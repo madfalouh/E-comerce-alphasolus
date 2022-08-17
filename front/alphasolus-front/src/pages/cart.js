@@ -29,20 +29,16 @@ if(cart.length!==0){
 let temp =[]; 
 cart.comand.map((element) => {
 if(element.status==="notstarted"){
-
 const productdata = {
 name : "singleData.name" ,
 price : "singleData.price" , 
 description :"singleData.description" , 
 img : "base64String" , 
 }
-
 temp.push(    <ProductCard  data={productdata} ></ProductCard>   )
 }
-
 })
 setCartProducts(temp)
-
 }
 
 console.log(cartProducts);

@@ -56,7 +56,7 @@ payload : err
 };
 
 
-export const  dispatchAddProduct = (creds) => async (dispatch) => {
+export const  dispatchAddComand = (creds) => async (dispatch) => {
 try{
 dispatch({
 type :ADD_COMANDSTATUS_REQUEST
@@ -64,7 +64,7 @@ type :ADD_COMANDSTATUS_REQUEST
 
 await axios({
 method:"post",
-url : "http://localhost:3000/products"  ,
+url : "http://localhost:3000/comands"  ,
 headers: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ data:creds
 console.log("gghh");
 
 dispatch({
-type :ADD_PRODUCTSTATUS_SUCCESS , 
+type :ADD_COMANDSTATUS_SUCCESS , 
 payload: {
 msg : "adeed"
 }
@@ -88,6 +88,90 @@ console.log(error);
 
 dispatch({
 type :  ADD_COMANDSTATUS_FAIL  , 
+payload : 
+         error.response && error.response.data.msg
+                    ? error.response.data.msg
+                    : error.msg,
+})
+}
+};
+
+
+
+export const  dispatchUpdateComand = (creds) => async (dispatch) => {
+try{
+dispatch({
+type :UPDATE_COMANDSTATUS_REQUEST
+})
+
+await axios({
+method:"post",
+url : "http://localhost:3000/comands/update"  ,
+headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+         // 'Authorization': 'Bearer ' + localStorage.getItem('userInfo')
+        },
+data:creds
+})
+
+console.log("gghh");
+
+dispatch({
+type :UPDATE_COMANDSTATUS_SUCCESS , 
+payload: {
+msg : "adeed"
+}
+})
+
+}catch(error){
+
+console.log(error);
+
+dispatch({
+type :  UPDATE_COMANDSTATUS_FAIL  , 
+payload : 
+         error.response && error.response.data.msg
+                    ? error.response.data.msg
+                    : error.msg,
+})
+}
+};
+
+
+
+export const  dispatdeleteComand = (creds) => async (dispatch) => {
+try{
+dispatch({
+type :COMAND_DELETE_REQUEST
+})
+
+await axios({
+method:"post",
+url : "http://localhost:3000/comands/delete"  ,
+headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+         // 'Authorization': 'Bearer ' + localStorage.getItem('userInfo')
+        },
+data:creds
+})
+
+console.log("gghh");
+
+dispatch({
+type :COMAND_DELETE_SUCCESS, 
+payload: {
+msg : "adeed"
+}
+})
+
+}catch(error){
+
+console.log(error);
+
+dispatch({
+type :  COMAND_DELETE_FAIL , 
 payload : 
          error.response && error.response.data.msg
                     ? error.response.data.msg
