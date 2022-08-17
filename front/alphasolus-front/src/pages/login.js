@@ -14,7 +14,7 @@ const initialState = {
 export default function Login() {
 const dispatch = useDispatch()
 const navigate=useNavigate()
-const [auth  ,setAuth ]= useState(useSelector((state) => state.auth) )
+const auth = useSelector((state) => state.auth) 
 
 const { error, userInfo, isLogged ,type } = auth
 
@@ -28,18 +28,24 @@ if(userInfo) {
 }
 } , [])
 
+useEffect (()=> {
+if(userInfo) {
+navigate("/home")
+}
+} , [userInfo])
 
-const hundleSubmit  = async (e) => {
+
+const hundleSubmit  = (e) => {
 e.preventDefault();
 const data = {
 email : emailRef.current.value  , 
 password : passwordRef.current.value
 }
- 
+
+
 
 dispatch(dispatchLogin(data))
-
-console.log("thissss"+auth.userInfo);
+console.log(userInfo);
 
 if(userInfo) {
 navigate("/home")
@@ -75,12 +81,12 @@ return (
                 </div>
                 <div class="field padding-bottom--24">
                   <div class="grid--50-50">
-                    <label for="password"  ref={passwordRef}  >Password</label>
+                    <label for="password"    >Password</label>
                     <div class="reset-pass">
                       <a href="#">Forgot your password?</a>
                     </div>
                   </div>
-                  <input type="password" name="password"></input> 
+                  <input type="password" name="password" ref={passwordRef} ></input> 
                 </div>
                 <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
                   <label for="checkbox">

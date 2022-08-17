@@ -10,6 +10,7 @@ import {
 getProductReducer ,
 addProductReducer
 } from './reducer/ProductReducer'
+import { getComandReducer } from './reducer/ComandReducer'
 
 
 
@@ -18,6 +19,7 @@ const reducer = combineReducers({
     register : userRegisterReducer , 
     getProducts : getProductReducer,
     addProductReducer :addProductReducer ,
+    getComand : getComandReducer
 })
 
 

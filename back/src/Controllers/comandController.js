@@ -4,6 +4,7 @@ const Comand = require('../Entity/command')
 const comandService = require("../Services/comandService")
 router.get('/' , findcomands)
 router.get('/:id' , findcomandsbyid)
+router.get('/user/:id' , findcomandsbyuserId)
 router.post('/' , addcomand)
 router.post('/delete' , deletecomand)
 router.post('/update' , updatecomand)
@@ -45,7 +46,7 @@ name:req.body.name ,
 totalprice: req.body.totalprice,
 products:req.body.products,
 modifiedOn:Date.now() , 
-status : 'onhold'
+status : req.body.status
 })
 try{
 
@@ -75,7 +76,7 @@ name:req.body.name ,
 totalprice: req.body.totalprice,
 products:req.body.products,
 modifiedOn:Date.now() , 
-status : 'onhold'
+status : req.body.status
 })
 try{
 const comands = await comandService.updatecomand(comand)
@@ -90,6 +91,14 @@ async function  findcomandsbystatus (status) {
 try{
 const comand = await comandService.findcomandbystatuts(status)
 res.send(comand) 
+}catch(err){
+return res.status(500).json({ msg: err.message })
+}
+}
+async function  findcomandsbyuserId (req , res) {
+try{
+const comands = await comandService.findcomandsbyuserId(req.params.id)
+res.send(comands)
 }catch(err){
 return res.status(500).json({ msg: err.message })
 }

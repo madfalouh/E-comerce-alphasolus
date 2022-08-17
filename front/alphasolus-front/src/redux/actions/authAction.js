@@ -73,7 +73,7 @@ await axios({
 dispatch({
             type:  USER_REGISTER_SUCCESS,
             payload : {
-                    user : data
+                    user : "signed"
                     }
         })
 

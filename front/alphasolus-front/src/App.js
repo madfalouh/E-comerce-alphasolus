@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Login from './login/login';
+import Login from './pages/login';
 import { useEffect } from 'react';
 import {useNavigate } from "react-router-dom";
 import Home from './home/Home';
@@ -9,8 +9,8 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import Register from './login/register';
-
+import Register from './pages/register';
+import Cart from './pages/cart';
 
 
 function App() {
@@ -35,6 +35,7 @@ const navigate=useNavigate()
  <Route path="/login" element={   <Login/>} />
  <Route path="/home" element={   <Home/>} />
  <Route path="/register" element={   <Register/>} />
+<Route path="/cart" element={   <Cart/>} />
 </Routes>
   
 

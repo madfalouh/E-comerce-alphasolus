@@ -44,25 +44,12 @@ return res.status(500).json({ msg: err.message })
 async function adduser (req , res){
 
 console.log(req.body);
- const token = jwt.sign(
-                    { 
-                    username:req.body.username , 
-                    email: req.body.email,
-                    firstName:req.body.firstName,
-                    lastName:req.body.lastName,
-                    type : req.body.type,
-                    },
-                    process.env.TOKEN_KEY,
-                    {
-                        expiresIn: "7d",
-                    }
-                );
 const password = await  Encryption.cryptPassword(req.body.password)
 const user = new User({
 username:req.body.username , 
 email: req.body.email,
 password:password,
-token:token,
+token:"token",
 firstName:req.body.firstName,
 lastName:req.body.lastName,
 type : req.body.type,

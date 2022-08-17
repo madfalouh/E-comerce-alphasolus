@@ -21,6 +21,16 @@ res.send(err)
 }
 return commands
 },
+findcomandsbyuserId:async function  findcomandsbyuserId (id) {
+let commands
+try{
+commands = await Comand.find({userId:id})
+console.log(commands );
+}catch(err){
+res.send(err)
+}
+return commands
+},
 findcomandbyname:async function  findcomandbyname (command) {
 let commands
 try{

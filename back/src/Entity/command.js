@@ -5,6 +5,10 @@ type:String,
 required:true , 
 index: {unique: true, dropDups: true}
 },
+userId : {
+type:String, 
+required:true , 
+} ,
 totalprice : {
 type:Number, 
 required:true, 
@@ -24,7 +28,7 @@ modifiedOn: {
     default: Date.now , 
 },
 status:{
-enum : ['onhold','accepted' , 'refused' ],
+enum : ['notstarted','onhold','accepted','refused'],
 }
 
 

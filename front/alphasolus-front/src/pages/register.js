@@ -14,10 +14,7 @@ const initialState = {
 export default function Register() {
 const dispatch = useDispatch()
 const navigate=useNavigate()
-
-const [auth  ,setAuth ]= useState(useSelector((state) => state.auth) )
 const register = useSelector((state) => state.register)
-const { error, userInfo, isLogged ,type } = auth
 const usernameRef = useRef()
 const firstnameRef = useRef()
 const lastnameRef = useRef()
@@ -26,11 +23,10 @@ const passwordRef = useRef()
 
 
 useEffect (()=> {
-if(userInfo) {
-//navigate("/home")
+if(register.user) {
+navigate("/login")
 }
-} , [])
-
+} , [register])
 
 const hundleSubmit  = async (e) => {
 e.preventDefault();
@@ -42,22 +38,7 @@ email : emailRef.current.value  ,
 password : passwordRef.current.value , 
 type : "admin" , 
 }
- 
 dispatch(dispatchRegister(data))
-
-localStorage.setItem("register"  , register.user)
-
-const newauth = {
-userInfo : "register.user"
-}
-
-setAuth(newauth)
-
-if(register.user) {
-navigate("/home")
-}
-
-
 }
 
 
@@ -79,7 +60,7 @@ return (
         <div class="formbg-outer">
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
-              <span class="padding-bottom--15">Sign in to your account</span>
+              <span class="padding-bottom--15">Create your new account</span>
               <form id="stripe-login">
                     <div class="field padding-bottom--24">
                   <label for="username">username</label>
@@ -100,16 +81,10 @@ return (
                 <div class="field padding-bottom--24">
                   <div class="grid--50-50">
                     <label for="password">Password</label>
-                    <div class="reset-pass">
-                      <a href="#">Forgot your password?</a>
-                    </div>
                   </div>
                   <input type="password" name="password"  ref={passwordRef}></input> 
                 </div>
                 <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
-                  <label for="checkbox">
-                    <input type="checkbox" name="checkbox"></input>   Stay signed in for a week
-                  </label>
                 </div>
                 <div class="field padding-bottom--24">
                   <input type="submit" name="submit" value="Continue"  onClick={hundleSubmit} ></input> 

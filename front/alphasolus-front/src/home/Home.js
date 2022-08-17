@@ -5,6 +5,8 @@ import { logout } from "../redux/actions/authAction";
 import { useDispatch, useSelector } from 'react-redux'
 import {dispatchGetProduct , dispatchAddProduct } from '../redux/actions/productAction'
 import { Buffer } from 'buffer';
+import ProductCard from "../component/product/productCard";
+import NavBar from "../component/product/navBar";
 
 
 export default function Home() {
@@ -30,25 +32,23 @@ dispatch(dispatchGetProduct())
 let temp = []
 
 if(!isnull){
-products.map((singleData) => {	
+products.map((singleData) => {
+
+
+
 const base64String =btoa(new Uint8Array(singleData.img.data.data).reduce(function (data, byte) {
+
+
 return data + String.fromCharCode(byte);
 }, ''));
+const productdata = {
+name : singleData.name ,
+price : singleData.price , 
+description :singleData.description , 
+img : base64String , 
+}
        temp.push( 
-
-		<div class="product">
-    <div class="image-box">
-      <img src={`data:image/png;base64,${base64String}`}   id="image-4"/>
-    </div>
-    <div class="text-box">
-      <h2 class="item">{singleData.name}</h2>
-      <h3 class="price">{singleData.price}</h3>
-      <p class="description">{singleData.description}</p>
-      <label for="item-4-quantity">Quantity:</label>
-
-    </div>
-  </div>
-
+<ProductCard  data={productdata} ></ProductCard>
  ) 
 })   
 setProducta(temp)}
@@ -120,35 +120,21 @@ dispatch(logout())
 const token = userInfo
 const decoded_token=  jwt_decode(token);
 
-
+const username = decoded_token.username
 
 
 return (
 
 <div>
 
-
-<p> welcome {decoded_token.username}    </p>  
-
-
-<p> images   </p>  
-
+<NavBar  user={username} ></NavBar>
 
  {producta}
 
 
-
-
-<ul> 
-
-{product.map( (pr=>(<li key={pr.id}>{pr.name}</li>
- ) 
-
-
-))}
-
-</ul>  
 <button  onClick={handleclick} > add </button>
+
+
 
 <button className="submit-btn-form" type="submit"  onClick={hundleLogout} >Logout</button>
 <input type="file" name="upload_file" id="file" onChange={(e)=>{ setFile( e.target.files[0] )}} ></input>
@@ -157,6 +143,9 @@ return (
 <p></p>  <input type="text"  placeholder="name"   ref={nameRef} ></input>
 <p></p> <input type="text"  placeholder="price"   ref={priceRef}></input>
 <p></p> <input type="text" placeholder="description"  ref={descRef}></input>
+
+
+
 
 </div>
 )
