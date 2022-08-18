@@ -1,15 +1,27 @@
 import { logout } from "../../redux/actions/authAction";
 import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useRef, useState } from "react";
 export default function  NavBar({user}) {
+const [ num , setNum] = useState(0)
 const dispatch = useDispatch()
-
+const comands = useSelector((state) => state.getComand)
 const hundleLogout = async (e) =>{
+
 e.preventDefault();
 dispatch(logout())
 }
 
 
-console.log(user);
+
+useEffect(()=>{
+
+if(comands.comand.length !==0){
+
+setNum(comands.comand[0].products.length)
+
+}
+
+} , [comands.comand.length])
 
 return(
 <nav class="navbar">
@@ -59,7 +71,7 @@ return(
         <li><a href="#">Contact</a></li>
         {  user ? <li><a href="#">{user}</a></li>   :<li><a href="#">Signin</a></li> }
         <li class="active"><a  onClick={hundleLogout} >   Logout</a></li>
-          <li>   <a    >  <div className="notification" >1</div> </a>  </li>
+          <li>   <a    >  <div className="notification" >  {num} </div> </a>  </li>
         <li>   <a    > Cart</a>  </li>
 
       </ul>

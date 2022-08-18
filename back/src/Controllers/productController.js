@@ -39,17 +39,7 @@ console.log(err);
 
 async function addproduct (req , res){
 
-
-
-
-
-
-
-
 const {data , mimetype} = req.files.file
-
-
-
 const product = new Product({
 name:req.body.name , 
 price: req.body.price,

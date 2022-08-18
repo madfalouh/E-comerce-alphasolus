@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { dispatchAddComand } from "../../redux/actions/comandAction";
+import { dispatchAddComand, dispatchGetComands, dispatchUpdateComand } from "../../redux/actions/comandAction";
 import { useDispatch, useSelector } from 'react-redux'
 import jwt_decode from "jwt-decode";
 
@@ -9,32 +9,101 @@ export default function ProductCard ({data}) {
 const dispatch = useDispatch()
 const token = localStorage.getItem('userInfo')
 const decoded_token=  jwt_decode(token);
-const comanddata = {
+const comands = useSelector((state) => state.getComand)
+const {comand , isnull} = comands 
+useEffect (()=>{
+ dispatch(dispatchGetComands(decoded_token.id))
+} , [])
+var i = 0
 
-name : "comm",
-userId :decoded_token.id , 
-totalprice : 13 , 
-products : [ {
-       productId: data.id ,
-        productName: data.name ,
-        productPrice :  data.price ,
-        productDescription : data.description , 
-        quantity: 12 ,
-        productimg : data.bufferedimg
-} ] ,
-status : 'notstarted',
+function boolean() { 
+i=0
+let f =false
+
+  for(var element of comand[0].products) {
+console.log(element.product);
+if(element.product===data.id) {
+f= true
+break ; 
+}
+i++
+}
+return f
 }
 
-console.log(data.name);
 
 const hundleAddClick = async (e) =>{
 e.preventDefault();
 
-dispatch(dispatchAddComand(data))
 
+
+if(comand.length===0){
+console.log("fcg");
+const comanddata = {
+name : "comm",
+userId:decoded_token.id , 
+totalprice : data.price , 
+products : [  { product:  data.id  , quantity : 1  }   ] ,
+status : 'notstarted',
+}
+dispatch(dispatchAddComand(comanddata))
+dispatch(dispatchGetComands(decoded_token.id))
+} else {
+
+
+
+
+
+console.log(boolean());
+
+
+if(boolean() ) {
+console.log("equals");
+let qte =1
+let temparray = comand[0].products
+console.log(i);
+temparray[i].quantity+=1
+const comanddata = {
+op :"add" , 
+_id : comand[0]._id ,
+name : "comm",
+userId:decoded_token.id , 
+totalprice : data.price*qte+comand[0].totalprice , 
+products : temparray  ,
+status : 'notstarted',
+}
+
+dispatch(dispatchUpdateComand(comanddata))
+dispatch(dispatchGetComands(decoded_token.id))
+} else  {
+console.log("not equals");
+const temparray = comand[0].products
+
+const temp ={ product:  data.id  , quantity : 1 } 
+temparray.push(temp)
+const comanddata = {
+op :"addarray" , 
+_id : comand[0]._id ,
+name : "comm",
+userId:decoded_token.id , 
+totalprice : data.price+comand[0].totalprice , 
+products : temparray  ,
+status : 'notstarted',
+}
+dispatch(dispatchUpdateComand(comanddata))
+dispatch(dispatchGetComands(decoded_token.id))
 
 }
 
+
+
+
+//
+
+
+
+}
+}
 
 
 return (  

@@ -1,38 +1,27 @@
 const mongoose = require('mongoose')
 const product = require('./product')
+const user = require('./user')
+Schema = mongoose.Schema
 const comandSchema = new mongoose.Schema({
 name : {
 type:String, 
 required:true , 
 index: {unique: true, dropDups: true}
 },
-userId : {
-type:String, 
-required:true , 
-} ,
+userId : { type: Schema.Types.ObjectId, ref: 'User' } ,
 totalprice : {
 type:Number, 
 required:true, 
 },
-    products: [
-      {
-        productId: String,
-        productName:String,
-        productPrice :Number ,
-        productDescription :String , 
-        quantity: Number,
-        productimg : {
-            data : Buffer , 
-            contentType : String, 
-                }
-      }
-    ],
+products:[ {product : { type: Schema.Types.ObjectId, ref: 'Product' } , quantity : { type:Number,required:true,} }],
+    
 modifiedOn: {
     type: Date,
     default: Date.now , 
 },
 status:{
-enum : ['notstarted','onhold','accepted','refused'],
+type:String, 
+required:true ,
 }
 
 

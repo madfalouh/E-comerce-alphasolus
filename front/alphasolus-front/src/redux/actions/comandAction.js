@@ -99,6 +99,7 @@ payload :
 
 
 export const  dispatchUpdateComand = (creds) => async (dispatch) => {
+console.log("l update");
 try{
 dispatch({
 type :UPDATE_COMANDSTATUS_REQUEST
@@ -115,13 +116,14 @@ headers: {
 data:creds
 })
 
-console.log("gghh");
+console.log("ended");
 
 dispatch({
 type :UPDATE_COMANDSTATUS_SUCCESS , 
 payload: {
-msg : "adeed"
+msg : "updated"
 }
+
 })
 
 }catch(error){

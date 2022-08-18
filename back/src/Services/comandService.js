@@ -7,7 +7,7 @@ let commands
 try{
 commands = await Comand.find()
 }catch(err){
-res.send(err)
+console.log(err);
 }
 return commands
 },
@@ -44,7 +44,7 @@ return commands
 try{
 await comand.save()
 }catch(err){
-res.send(err)
+console.log(err);
 }
 },deletecomand:async function deletecomand (id){
 try{
@@ -52,17 +52,28 @@ await Comand.deleteOne({_id:id})
 }catch(err){
 console.log(err)
 }
-}, updatecomand : async function updatecomand(comand) {  
+}, updatecomand : async function updatecomand(comand , id , op) {  
+
+
 try{
-await Comand.findByIdAndUpdate(comand.id ,{ 
-name : comand.name,  
+
+console.log(id);
+
+await Comand.findByIdAndUpdate(id ,{ 
+
 totalprice :comand.totalprice ,
 products: comand.products,
 modifiedOn : Date.now()
- },function (err, docs) {
-})
+ })
 }catch(err){
+
+console.log(err);
 }
+
+
+
+
+
 },
 findproductbyname:async function  findproductbyname (command) {
 let commands

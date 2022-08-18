@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router()
-const Comand = require('../Entity/command')
+const Comand = require('../Entity/command');
+const Product = require('../Entity/product');
 const comandService = require("../Services/comandService")
 router.get('/' , findcomands)
 router.get('/:id' , findcomandsbyid)
@@ -39,15 +40,21 @@ console.log(err);
 
 async function addcomand (req , res){
 
-console.log(req);
+console.log("l add");
+
 
 const comand = new Comand({
+
 name:req.body.name , 
+userId :req.body.userId , 
 totalprice: req.body.totalprice,
-products:req.body.products,
+products:   req.body.products ,
+status : req.body.status ,
 modifiedOn:Date.now() , 
-status : req.body.status
 })
+
+
+console.log(comand);
 try{
 
 await comandService.addcomand(comand)
@@ -70,8 +77,10 @@ return res.status(500).json({ msg: err.message })
 
 
 async function  updatecomand (req , res) {
-console.log(req.body);
+
+
 const comand = new Comand({
+id : req.body._id, 
 name:req.body.name , 
 totalprice: req.body.totalprice,
 products:req.body.products,
@@ -79,10 +88,10 @@ modifiedOn:Date.now() ,
 status : req.body.status
 })
 try{
-const comands = await comandService.updatecomand(comand)
+const comands = await comandService.updatecomand(comand , req.body._id , req.body.op)
 res.send(comands)
 }catch(err){
-return res.status(500).json({ msg: err.message })
+console.log(err);
 }
 }
 
