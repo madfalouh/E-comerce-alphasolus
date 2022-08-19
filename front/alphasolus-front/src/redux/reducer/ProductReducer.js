@@ -2,6 +2,9 @@ import {
  GET_PRODUCT_REQUEST  ,
  GET_PRODUCT_SUCCESS  ,
  GET_PRODUCT_FAIL   ,
+ GET_IDPRODUCT_REQUEST  ,
+ GET_IDPRODUCT_SUCCESS  ,
+ GET_IDPRODUCT_FAIL   ,
  UPDATE_PRODUCTSTATUS_REQUEST,  
  UPDATE_PRODUCTSTATUS_FAIL  ,
  UPDATE_PRODUCTSTATUS_RESET  ,
@@ -43,6 +46,27 @@ export const getProductReducer = (state = initialState, action) => {
             return state
     }
 }
+
+
+export const getProductIdReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case GET_IDPRODUCT_REQUEST:
+            return { ...state, loading: true }
+        case GET_IDPRODUCT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                products: action.payload.products,
+                isnull : false
+            }
+        case GET_IDPRODUCT_FAIL:
+            return { loading: false, error: action.payload }
+
+        default:
+            return state
+    }
+}
+
 
 export const addProductReducer = (state = {}, action) => {
     switch (action.type) {

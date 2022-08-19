@@ -3,6 +3,10 @@ import {
  GET_PRODUCT_REQUEST  ,
  GET_PRODUCT_SUCCESS  ,
  GET_PRODUCT_FAIL   ,
+ GET_IDPRODUCT_REQUEST  ,
+ GET_IDPRODUCT_SUCCESS  ,
+ GET_IDPRODUCT_FAIL   ,
+
  UPDATE_PRODUCTSTATUS_REQUEST,  
  UPDATE_PRODUCTSTATUS_FAIL  ,
  UPDATE_PRODUCTSTATUS_RESET  ,
@@ -51,6 +55,39 @@ payload : err
 })
 }
 };
+
+export const  dispatchGetByIdProduct =(id) => async (dispatch) => {
+console.log(id);
+
+try{
+dispatch({
+type :GET_IDPRODUCT_REQUEST
+})
+const config = {
+      headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+         // 'Authorization': 'Bearer ' + localStorage.getItem('userInfo')
+        },
+}
+const {data}=await axios.get("http://localhost:3000/products/"+id ,config)
+
+dispatch({
+type :GET_IDPRODUCT_SUCCESS , 
+payload: {
+products : data
+}
+})
+
+}catch(err){
+
+dispatch({
+type :  GET_IDPRODUCT_FAIL  , 
+payload : err
+})
+}
+};
+
 
 
 export const  dispatchAddProduct = (creds) => async (dispatch) => {

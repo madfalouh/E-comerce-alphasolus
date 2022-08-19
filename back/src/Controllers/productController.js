@@ -22,7 +22,7 @@ return res.status(500).json({ msg: err.message })
 async function  findproductsbyid (req , res) {
 try{
 const products = await productService.findproductsbyid(Product,req.params.id)
-res.send(products)
+//res.send(products)
 }catch(err){
 return res.status(500).json({ msg: err.message })
 

@@ -15,7 +15,6 @@ findproductsbyid:async function  findproductsbyid (Product,id) {
 let products
 try{
 products = await Product.findById(id)
-console.log(products );
 }catch(err){
 res.send(err)
 }

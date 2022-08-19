@@ -8,7 +8,8 @@ import { combineReducers } from 'redux'
 import authReducer, { userRegisterReducer } from './reducer/AuthReducer'
 import {
 getProductReducer ,
-addProductReducer
+addProductReducer,
+getProductIdReducer
 } from './reducer/ProductReducer'
 import { addComandReducer, deleteComandReducer, getComandReducer, updateComandReducer } from './reducer/ComandReducer'
 
@@ -23,6 +24,7 @@ const reducer = combineReducers({
     addComand : addComandReducer , 
     updatecomand : updateComandReducer,
     deletecomand : deleteComandReducer ,
+    getIdProduct : getProductIdReducer ,
 })
 
 
