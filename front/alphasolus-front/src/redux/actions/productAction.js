@@ -70,12 +70,13 @@ const config = {
          // 'Authorization': 'Bearer ' + localStorage.getItem('userInfo')
         },
 }
-const {data}=await axios.get("http://localhost:3000/products/"+id ,config)
+const {data}=await axios.get("http://localhost:3000/products/"+id.product ,config)
 
 dispatch({
 type :GET_IDPRODUCT_SUCCESS , 
 payload: {
-products : data
+products : data ,
+quantity:id.quantity
 }
 })
 

@@ -60,7 +60,6 @@ setProducta(temp)}
 
 
 
-
 const handleclick = async (e) =>{
 
 e.preventDefault();

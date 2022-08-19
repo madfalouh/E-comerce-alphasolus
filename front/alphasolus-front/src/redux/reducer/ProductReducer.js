@@ -51,12 +51,13 @@ export const getProductReducer = (state = initialState, action) => {
 export const getProductIdReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_IDPRODUCT_REQUEST:
-            return { ...state, loading: true }
+            return { ...state, loading: true , isnull:true }
         case GET_IDPRODUCT_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 products: action.payload.products,
+                quantity :action.payload.quantity ,
                 isnull : false
             }
         case GET_IDPRODUCT_FAIL:
