@@ -76,7 +76,8 @@ quantity : prod.quantity ,
 
 table.current.push(    <CartCard  data={productdata} ></CartCard>   )
 
-if(table.current.length===3) {
+
+if(table.current.length===cart.comand[0].products.length) {
 
 setCartProducts(table.current)
 

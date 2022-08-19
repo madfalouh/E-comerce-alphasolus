@@ -19,9 +19,9 @@ var i = 0
 function boolean() { 
 i=0
 let f =false
-
-  for(var element of comand[0].products) {
+for(var element of comand[0].products) {
 console.log(element.product);
+console.log(data.id);
 if(element.product===data.id) {
 f= true
 break ; 
