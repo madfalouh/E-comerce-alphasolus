@@ -1,6 +1,10 @@
+import { dispatchUpdateComand } from "../../redux/actions/comandAction";
+const dispatch = useDispatch()
 export default function CartCard ({data}) {
 
 const hundledelete = async (e) =>{
+e.preventDefault();
+
 
 
 
