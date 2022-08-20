@@ -29,6 +29,8 @@ useEffect(() => {
 
 dispatch(dispatchGetProduct())
 
+console.log("fgghh");
+
 let temp = []
 
 if(!isnull){

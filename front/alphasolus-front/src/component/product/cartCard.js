@@ -1,14 +1,55 @@
-import { dispatchUpdateComand } from "../../redux/actions/comandAction";
-const dispatch = useDispatch()
-export default function CartCard ({data}) {
+import { dispatchGetComands, dispatchUpdateComand } from "../../redux/actions/comandAction";
+import { useDispatch, useSelector } from 'react-redux'
 
+import jwt_decode from "jwt-decode";
+
+
+export default function CartCard ({data}) {
+const dispatch = useDispatch()
+const comands = useSelector((state) => state.getComand)
+const {comand , isnull} = comands 
+const token = localStorage.getItem('userInfo')
+const decoded_token=  jwt_decode(token);
 const hundledelete = async (e) =>{
 e.preventDefault();
 
+var j=0 
+let temparray = comand[0].products
 
+console.log(temparray);
 
+console.log(data.id);
 
+for (var i  of temparray ) {
+    
 
+    if ( i.product ===data.id) {
+        break     
+    }
+
+j++
+}
+console.log(j);
+
+let temp = temparray[j]
+temparray.splice(j, 1)
+
+let qte = temp.quantity
+console.log(data.price*qte);
+const comanddata = {
+op :"add" , 
+_id : comand[0]._id ,
+name : "comm",
+userId:decoded_token.id , 
+totalprice : comand[0].totalprice-data.price*qte , 
+products : temparray  ,
+status : 'notstarted',
+}
+
+console.log(decoded_token.id);
+
+dispatch(dispatchUpdateComand(comanddata))
+dispatch(dispatchGetComands(decoded_token.id))
 }
 
 

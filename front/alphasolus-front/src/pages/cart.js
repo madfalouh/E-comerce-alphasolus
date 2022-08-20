@@ -66,6 +66,7 @@ const base64String =btoa(new Uint8Array(prod.products.img.data.data).reduce(func
 return data + String.fromCharCode(byte);
 }, ''));
 const productdata = {
+id : prod.products._id ,
 name : prod.products.name,
 price : prod.products.price , 
 description :prod.products.description , 
